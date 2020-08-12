@@ -54,12 +54,8 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "Called ViewModelProvider!")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        //Bind view directly to view model
+        binding.gameViewModel = viewModel
 
         //Observe score changes
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
@@ -75,7 +71,6 @@ class GameFragment : Fragment() {
         viewModel.timeLeft.observe(viewLifecycleOwner, Observer {currentTime ->
             binding.timerText.text = DateUtils.formatElapsedTime(currentTime)
         })
-
 
         //Observe game finished event
         viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { hasFinished ->
