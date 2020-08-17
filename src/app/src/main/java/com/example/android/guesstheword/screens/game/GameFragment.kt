@@ -56,16 +56,7 @@ class GameFragment : Fragment() {
 
         //Bind view directly to view model
         binding.gameViewModel = viewModel
-
-        //Observe score changes
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-        })
-
-        //Observe word changes
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
-            binding.wordText.text = newWord
-        })
+        binding.lifecycleOwner = this
 
         //Observe time left counter
         viewModel.timeLeft.observe(viewLifecycleOwner, Observer {currentTime ->
